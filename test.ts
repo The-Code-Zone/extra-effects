@@ -10,13 +10,13 @@ let calibrationEffect = extraEffects.createCustomSpreadEffectData(
 )
 for (let color = 0; color < 6; color++) {
     for (let shape = 0; shape < 4; shape++) {
-        sfx = extraEffects.createFullPresetsSpreadEffectData(
+        sfx = extraEffects.createNewEffect(
             color,
             shape
         )
         for (let diameter = 1; diameter <= 6; diameter++) {
             effects.clearParticles(calibrationCenter)
-            extraEffects.createSpreadEffectOnAnchor(
+            extraEffects.createEffectOnSprite(
                 calibrationCenter,
                 calibrationEffect,
                 -1,
@@ -24,7 +24,7 @@ for (let color = 0; color < 6; color++) {
                 300,
             )
             for (let density = 0; density < 1; density++) {
-                extraEffects.createSpreadEffectAt(
+                extraEffects.createEffectAt(
                     sfx,
                     scene.screenWidth() / 2,
                     scene.screenHeight() / 2,

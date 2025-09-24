@@ -1,4 +1,4 @@
-enum ExtraEffectPresetColor {
+enum ExtraEffectColours {
     //% block="fire"
     Fire,
     //% block="ice"
@@ -13,7 +13,7 @@ enum ExtraEffectPresetColor {
     Smoke,
 }
 
-enum ExtraEffectPresetShape {
+enum ExtraEffectShapes {
     //% block="spark"
     Spark,
     //% block="explosion"
@@ -101,9 +101,9 @@ namespace extraEffects {
     //% inlineInputMode=inline
     //% blockId="presetEffectPicker"
     //% block="effect $color $shape"
-    export function createFullPresetsSpreadEffectData(
-        color: ExtraEffectPresetColor,
-        shape: ExtraEffectPresetShape,
+    export function createNewEffect(
+        color: ExtraEffectColours,
+        shape: ExtraEffectShapes,
     ): SpreadEffectData {
         return __createShapePresetSpreadEffectData(
             createPresetColorTable(color),
@@ -124,7 +124,7 @@ namespace extraEffects {
     //% color.shadow="colorindexpicker" color.defl=5
     export function createSingleColorSpreadEffectData(
         color: number,
-        shape: ExtraEffectPresetShape,
+        shape: ExtraEffectShapes,
     ): SpreadEffectData {
         return __createShapePresetSpreadEffectData(
             [color],
@@ -134,11 +134,11 @@ namespace extraEffects {
 
     function __createShapePresetSpreadEffectData(
         colorLookupTable: number[],
-        shape: ExtraEffectPresetShape,
+        shape: ExtraEffectShapes,
     ): SpreadEffectData {
         const sizeLookupTable = PRESET_SIZE_LUT[shape]
         switch (shape) {
-            case ExtraEffectPresetShape.Spark:
+            case ExtraEffectShapes.Spark:
                 return new SpreadEffectData(
                     colorLookupTable,
                     sizeLookupTable,
@@ -148,7 +148,7 @@ namespace extraEffects {
                     0,
                     true
                 )
-            case ExtraEffectPresetShape.Explosion:
+            case ExtraEffectShapes.Explosion:
                 return new SpreadEffectData(
                     colorLookupTable,
                     sizeLookupTable,
@@ -157,7 +157,7 @@ namespace extraEffects {
                     new NumberRange(400, 600),
                     0.66
                 )
-            case ExtraEffectPresetShape.Cloud:
+            case ExtraEffectShapes.Cloud:
                 return new SpreadEffectData(
                     colorLookupTable,
                     sizeLookupTable,
@@ -166,7 +166,7 @@ namespace extraEffects {
                     new NumberRange(800, 1200),
                     0.75
                 )
-            case ExtraEffectPresetShape.Twinkle:
+            case ExtraEffectShapes.Twinkle:
                 return new SpreadEffectData(
                     colorLookupTable,
                     sizeLookupTable,
@@ -208,7 +208,7 @@ namespace extraEffects {
     //% lifespan.shadow="timePicker" lifespan.defl=100
     //% diameter.min=20 diameter.max=100 diameter.defl=48
     //% particlesPerSecond.min=10 particlesPerSecond.max=50 particlesPerSecond.defl=20
-    export function createSpreadEffectAt(
+    export function createEffectAt(
         effectData: SpreadEffectData,
         x: number,
         y: number,
@@ -257,7 +257,7 @@ namespace extraEffects {
     //% diameter.min=20 diameter.max=100 diameter.defl=48
     //% particlesPerSecond.min=10 particlesPerSecond.max=50 particlesPerSecond.defl=20
     //% lifespan.shadow="timePicker" lifespan.defl=100
-    export function createSpreadEffectOnAnchor(
+    export function createEffectOnSprite(
         sprite: Sprite,
         effectData: SpreadEffectData,
         lifespan: number = 100,
@@ -361,7 +361,7 @@ namespace extraEffects {
     //% group="Colors" color="#ff9008"
     //% blockId="presetColorTablePicker"
     //% block="array of $color colors"
-    export function createPresetColorTable(color: ExtraEffectPresetColor): number[] {
+    export function createPresetColorTable(color: ExtraEffectColours): number[] {
         return PRESET_COLOR_LUT[color]
     }
 
@@ -372,7 +372,7 @@ namespace extraEffects {
     //% group="Sizes" color="#ff9008"
     //% blockId="presetSizeTablePicker"
     //% block="array of $shape sizes"
-    export function createPresetSizeTable(shape: ExtraEffectPresetShape): number[] {
+    export function createPresetSizeTable(shape: ExtraEffectShapes): number[] {
         return PRESET_SIZE_LUT[shape]
     }
 
